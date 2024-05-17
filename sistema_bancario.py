@@ -5,25 +5,23 @@ import textwrap
 def deposito (saldo, valor, extrato, /):
     if valor > 0:
         saldo += valor
-        extrato.append(f"Depósito de R$ {valor}")
-        print("\n === Deposito realizado com sucesso! ===")
-
+        extrato += f"Depósito:\tR$ {valor:.2f}\n"
+        print("\n=== Depósito realizado com sucesso! ===")
     else:
-        print("\n @@@ Operação falhou! O valor informado não é válido. @@@")
-        
+        print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
+
     return saldo, extrato
 
 def saque (*, saldo, valor, extrato, limite, numero_de_saques, Limite_de_saques):
     if numero_de_saques < Limite_de_saques:
-        valor = float(input("Digite o valor do saque: "))
         if valor > 0:
             if valor <= saldo:
                 saldo -= valor
-                extrato.append(f"Saque de R$ {valor}")
+                extrato += f"Saque:\t\tR$ {valor:.2f}\n"
                 numero_de_saques += 1
                 print("\n === Saque realizado com sucesso! ===")
             else:
-                print("Saldo insuficiente!")
+                print("\nSaldo insuficiente!")
         else:
             print("\n @@@ Operação falhou! O valor informado não é válido. @@@")
     else:
@@ -45,7 +43,7 @@ def criar_usuario(usuarios):
 
      usuarios.append({"nome":nome, "data_de_nascimento":data_de_nascimento, "cpf":cpf, "endereco":endereço })
 
-     print("=== Usuário cadastrado com sucesso! ===")
+     print("\n=== Usuário cadastrado com sucesso! ===")
 
 def filtrar_usuario(cpf, usuarios):
      usuarios_filtrados = [usuario for usuario in usuarios if usuario["cpf"] == cpf] 
@@ -127,19 +125,20 @@ def main():
                   print("\n === Usuario logado com sucesso! ===")
                   while True:
                       opcao = int(input('''
-                                  Banco Digital
+                Banco Digital
 
-                      ============ Bem-Vindo(a) ============
+    ============ Bem-Vindo(a) ============
+                                       
+           [1] - Depositar
+           [2] - Sacar
+           [3] - Extrato
+           [4] - Lista Contas
+           [0] - Sair
+                                        
+    ======================================
 
-                             [1] - Depositar
-                             [2] - Sacar
-                             [3] - Extrato
-                             [4] - Lista Contas
-                             [0] - Sair
-                      ======================================
-
-                      Escolha sua opcao:
-                      => '''))
+    Escolha sua opcao:
+    => '''))
 
                       if opcao == 1:
                           valor = float(input("Digite o valor do deposito: "))
@@ -152,14 +151,7 @@ def main():
                       if opcao == 4:
                           lista_contas(contas)
                       if opcao == 0:
-                          print("\n === Sistema encerrado! ===")
-                          print('''\n
-                          =======================================''')
                           break
-                      else:
-                          print("\n@@@ Operação invalida! Por favor selecione novamente a operação desejada. @@@")
-                          print('''\n
-                          =======================================''')
               else:
                 print("\n @@@ Usuario não existe! @@@")
           if opcao == 0:
@@ -167,10 +159,7 @@ def main():
                 print('''\n
                 =======================================''')
                 break
-          else:
-              print("\n@@@ Operação invalida! Por favor selecione novamente a operação desejada. @@@")
-              print('''\n
-              =======================================''')
+          
               
               
                           
